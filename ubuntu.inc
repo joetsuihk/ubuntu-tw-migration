@@ -329,9 +329,7 @@ class XoopsUserPictureMigration extends Migration
 
     $query = Database::getConnection('default', 'for_migration')
             ->select('xoops_users', 'u')
-            // ->condition('created_userid', 12341, '=')
-            // ->condition('a.blog_posts_id', 2047, '=')
-            // ->condition('pd.blog_parameter_key', 1, '=')
+            // ->condition('uid', 83, '=')
             ->condition('u.user_avatar', 'blank.gif', '!=')
             ->fields('u', array('uid', 'user_avatar'));
 
@@ -355,13 +353,19 @@ class XoopsUserPictureMigration extends Migration
     $this->addFieldMapping('uid', 'uid');
     $this->addFieldMapping('value', 'user_avatar');
     $this->addFieldMapping('destination_dir')->defaultValue('public://legacy');
+    $this->addFieldMapping('source_dir')->defaultValue('public://legacy');
     $this->addFieldMapping('destination_file', 'user_avatar');
+    $this->addFieldMapping('preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('file_replace')->defaultValue(MigrateFile::FILE_EXISTS_REUSE);
 
     $this->addUnmigratedDestinations(array('timestamp'));
   }
 
-  public function prepareRow($row)
+  public function complete($entity, $row)
   {
-    $row->user_avatar = 'public://legacy/'.$row->user_avatar;
+    db_query("UPDATE {users} SET picture = :fid WHERE uid = :uid", array(
+      ':fid' => $entity->fid,
+      ':uid' => $row->uid,
+    ));
   }
 }
