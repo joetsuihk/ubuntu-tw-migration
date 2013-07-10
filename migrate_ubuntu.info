@@ -1,0 +1,9 @@
+name = Migrate Of ubuntu-tw content
+description = Migrate old content from xoops
+package = development
+core = 7.x
+
+dependencies[] = migrate
+
+files[] = migrate_ubuntu.migrate.inc
+files[] = ubuntu.inc

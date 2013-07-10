@@ -1,0 +1,16 @@
+This is Drupal module that migrate ubuntu-tw.org forum content from Xoops to
+Drupal. THe first part is completed without git, during hackathon of Drupal Camp
+Taipei 2013. Related information: http://2013.drupalcamp.tw/page/56
+
+Although this module is developed solely by joetsuihk, there are numerious people
+involved before, during, and even after the hackathon. Part of their code may
+not be open sourced (most are configuration based) but they deserve mention.
+
+TKY
+大魔王
+凍仁
+Emily
+BlueT
+魏藥
+
+Email skipped for privacy reasons
